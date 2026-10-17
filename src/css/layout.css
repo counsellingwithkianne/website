@@ -1,0 +1,227 @@
+/* ==========================================================================
+   Layout primitives: container, sections, split rows, reading column,
+   and the small shapes reused across pages (arch frame, divider, panel).
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Vertical rhythm between sections */
+.section {
+  padding-bottom: var(--section-space);
+}
+.section--first {
+  padding-top: clamp(2.5rem, 6vw, 5.5rem);
+  padding-bottom: clamp(3.5rem, 7vw, 5.5rem);
+}
+.section--compact {
+  padding-bottom: clamp(3.5rem, 7vw, 5.5rem);
+}
+
+/* A vertical flow with even gaps */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap, var(--space-6));
+}
+.stack--start {
+  align-items: flex-start;
+}
+.stack--center {
+  align-items: center;
+  text-align: center;
+}
+
+/* Text beside an image. Wraps to a single column on narrow screens. */
+.split {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-12) var(--split-gap);
+}
+.split > * {
+  min-width: 0;
+}
+.split__text {
+  flex: 1 1 27.5rem;
+  max-width: 40rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-6);
+}
+.split__media {
+  flex: 1 1 21rem;
+  max-width: 30rem;
+}
+.split__media--wide {
+  flex-basis: 25rem;
+  max-width: 31.25rem;
+}
+
+/* Single calm reading column */
+.prose {
+  display: flex;
+  flex-direction: column;
+  gap: 1.875rem;
+  max-width: var(--measure);
+  margin-inline: auto;
+  font-size: var(--fs-prose);
+  line-height: var(--lh-prose);
+}
+.prose--wide {
+  max-width: 51.25rem;
+}
+
+.pullquote {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  padding-block: var(--space-4);
+  text-align: center;
+}
+.pullquote__text {
+  font-family: var(--font-serif);
+  font-size: var(--fs-quote);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.2;
+}
+.pullquote__text--lg {
+  padding-block: var(--space-6);
+  font-size: clamp(2.125rem, 4vw, 3.25rem);
+  line-height: 1.15;
+  text-align: center;
+}
+
+/* --- Shapes ------------------------------------------------------------ */
+
+/* Arched photo frame, echoing the circle in the logo */
+.arch {
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-arch);
+  overflow: hidden;
+  background: var(--color-sand);
+}
+.arch > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.rounded-media {
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background: var(--color-sand-deep);
+}
+.rounded-media > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Fine gold hairline with a small dot, as under her name in the logo */
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.875rem;
+}
+.divider::before,
+.divider::after {
+  content: "";
+  width: var(--divider-width, 6rem);
+  height: 1px;
+  background: var(--color-gold);
+  opacity: 0.75;
+}
+.divider__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-gold);
+}
+.divider--start {
+  justify-content: flex-start;
+  --divider-width: 4rem;
+}
+.divider--start::after {
+  display: none;
+}
+.divider--short {
+  --divider-width: 4.5rem;
+}
+
+/* Soft sand block */
+.panel {
+  padding: clamp(2rem, 5vw, 4.5rem);
+  border-radius: var(--radius-lg);
+  background: var(--color-sand);
+}
+.panel--round {
+  border-radius: var(--radius-xl);
+}
+.panel--dashed {
+  background: transparent;
+  border: 1.5px dashed var(--color-gold);
+}
+
+/* Dashed stand-in for a photo that is still to be taken */
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  aspect-ratio: 4 / 5;
+  padding: var(--space-8);
+  border: 1.5px dashed var(--color-gold);
+  border-radius: 1.5rem;
+  background: rgb(241 228 208 / 0.55);
+  text-align: center;
+}
+.placeholder--arch {
+  border-radius: var(--radius-arch);
+}
+.placeholder--round {
+  flex: none;
+  width: 7rem;
+  aspect-ratio: 1;
+  padding: var(--space-3);
+  border-radius: 50%;
+  background: rgb(250 244 234 / 0.6);
+}
+.placeholder__icon {
+  width: 6rem;
+  opacity: 0.9;
+}
+.placeholder__text {
+  max-width: 17.5rem;
+  font-size: 1.0625rem;
+  color: #4a3a22;
+}
+
+/* --- Modifiers ---------------------------------------------------------- */
+.split--center {
+  justify-content: center;
+}
+.stack--loose {
+  --stack-gap: var(--space-8);
+}
+.arch--focus-upper > img {
+  object-position: 50% 40%;
+}
+
+/* Hairline with a small protea in the middle */
+.divider--protea {
+  --divider-width: 5.25rem;
+  gap: 1.125rem;
+  padding-block: var(--space-4);
+}
+.divider--protea img {
+  width: 4.5rem;
+}

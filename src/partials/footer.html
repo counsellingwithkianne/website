@@ -1,0 +1,29 @@
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <img class="site-footer__logo" src="assets/images/logo.webp" width="900" height="442" alt="{{ site.person }}, {{ site.logoTagline }}" loading="lazy" decoding="async">
+        <p class="site-footer__name">{{ site.name }}</p>
+        <p>{{ site.credentials.degree }}</p>
+        <p>{{ site.credentials.membership }}</p>
+      </div>
+      <div class="site-footer__contact">
+        <p class="label label--on-sand">Contact</p>
+        <a class="link-underline" href="{{ site.whatsappUrl }}" target="_blank" rel="noopener">WhatsApp {{ site.contact.phoneDisplay }}</a>
+        <a class="link-underline" href="{{ site.mailto }}">{{ site.contact.email }}</a>
+        <a class="link-underline" href="{{ site.instagramUrl }}" target="_blank" rel="noopener">Instagram @{{ site.contact.instagramHandle }}</a>
+      </div>
+    </div>
+
+    <div class="divider" aria-hidden="true"><span class="divider__dot"></span></div>
+
+    <div class="urgent-help">
+      <p>{{ site.urgentHelp }}</p>
+    </div>
+
+    <div class="site-footer__legal">
+      <span>&copy; {{ site.year }} {{ site.name }}</span>
+      <a class="link-underline" href="contact.html#privacy">Privacy</a>
+    </div>
+  </div>
+</footer>

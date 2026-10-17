@@ -1,0 +1,9 @@
+# Keep line endings consistent between Windows, macOS and the CI runner.
+* text=auto eol=lf
+
+# Binary assets
+*.webp binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.woff2 binary

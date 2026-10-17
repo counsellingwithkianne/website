@@ -1,0 +1,29 @@
+{
+  "name": "Counselling with Kianne",
+  "person": "Kianne Coltman",
+  "role": "Specialist Wellness Counsellor",
+  "logoTagline": "Counselling and Psychometry",
+  "url": "https://counsellingwithkianne.co.za",
+  "locale": "en_ZA",
+  "noindex": true,
+  "contact": {
+    "phoneDisplay": "066 412 1259",
+    "whatsappNumber": "27664121259",
+    "whatsappMessage": "Hi Kianne, I'd like to book a free 15-minute call",
+    "email": "kiannecounselling@gmail.com",
+    "instagramHandle": "counselling.with.kianne",
+    "psychologyTodayUrl": "https://www.psychologytoday.com/za/counselling/kianne-alexandra-coltman-tokai-wc/1543868"
+  },
+  "credentials": {
+    "degree": "BA Honours (Psychology), University of the Witwatersrand",
+    "membership": "Member of the Association for Supportive Counsellors and Holistic Practitioners (ASCHP), membership no. 9336"
+  },
+  "urgentHelp": "If you're in a very dark place right now, please don't wait for our next session. You can call the SADAG Suicide Crisis Helpline on 0800 567 567 any time, day or night, and it's free. If you or someone else is in immediate danger, call 112 from your cellphone. I'm not an emergency service, but support is out there, and you deserve it.",
+  "nav": [
+    { "key": "about", "label": "About", "href": "about.html" },
+    { "key": "approach", "label": "My approach", "href": "approach.html" },
+    { "key": "help", "label": "How I can help", "href": "help.html" },
+    { "key": "fees", "label": "Fees and booking", "href": "fees.html" },
+    { "key": "contact", "label": "Contact", "href": "contact.html" }
+  ]
+}

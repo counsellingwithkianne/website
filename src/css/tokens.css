@@ -1,0 +1,92 @@
+/* ==========================================================================
+   Design tokens
+   Every colour, size and font used on the site is defined here, once.
+   Values come from the brand brief (logo palette) and the website vision board.
+   ========================================================================== */
+
+:root {
+  /* --- Brand palette --------------------------------------------------- */
+  --color-cream: #faf4ea;          /* page ground */
+  --color-sand: #f1e4d0;           /* section bands, cards */
+  --color-sand-deep: #ebd9be;      /* card hover */
+  --color-gold: #b07d3f;           /* hairlines, dots, monogram (decorative only) */
+  --color-protea: #d3978f;         /* soft fills (decorative only) */
+  --color-rose: #a8564f;           /* labels, links, active nav (4.7:1 on cream) */
+  --color-sage: #707a5c;           /* leaf accents (decorative only) */
+  --color-bronze: #8c5e2a;         /* buttons, prices */
+  --color-bronze-dark: #7a4f20;    /* text on sand (meets 4.5:1) */
+  --color-bronze-hover: #6e4720;   /* button hover */
+  --color-ink: #1f1c19;            /* body text */
+  --color-ink-soft: #2e2923;
+  --color-ink-muted: #4a433b;
+  --color-ink-subtle: #5a5047;
+
+  /* --- Semantic colours ------------------------------------------------ */
+  --bg: var(--color-cream);
+  --bg-band: var(--color-sand);
+  --text: var(--color-ink);
+  --link: var(--color-rose);
+  --link-hover: var(--color-bronze);
+  --line: rgb(176 125 63 / 0.4);        /* gold hairline */
+  --line-soft: rgb(176 125 63 / 0.28);
+  --focus-ring: var(--color-bronze);
+
+  /* --- Typography ------------------------------------------------------ */
+  --font-serif: "Cormorant Garamond", "Cormorant", Georgia, "Times New Roman", serif;
+  --font-sans: "Jost", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --fs-body: 1.09375rem;                         /* 17.5px, never smaller on mobile */
+  --fs-body-lg: 1.1875rem;                       /* 19px */
+  --fs-prose: 1.15625rem;                        /* 18.5px */
+  --fs-small: 1rem;                              /* 16px */
+  --fs-label: 0.8125rem;                         /* 13px, uppercase */
+  --fs-display: clamp(3.375rem, 8vw, 6.75rem);   /* home hero headline */
+  --fs-page-title: clamp(3.375rem, 7vw, 6rem);   /* inner page h1 */
+  --fs-page-title-sm: clamp(2.625rem, 5.2vw, 4.25rem);
+  --fs-h2: clamp(2.25rem, 4.6vw, 3.75rem);
+  --fs-h3: 2.25rem;
+  --fs-lede: clamp(1.625rem, 2.6vw, 2.125rem);   /* serif italic subline */
+  --fs-quote: clamp(2rem, 3.6vw, 2.75rem);
+  --fs-quote-xl: clamp(2.625rem, 6vw, 5.25rem);
+  --fs-price: clamp(4.75rem, 9vw, 7rem);
+
+  --lh-body: 1.7;
+  --lh-prose: 1.85;
+
+  /* --- Spacing scale (4px base) ---------------------------------------- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+
+  --gutter: clamp(1.5rem, 4vw, 3.5rem);
+  --section-space: clamp(4.5rem, 9vw, 7.5rem);
+  --split-gap: clamp(2.5rem, 6vw, 6rem);
+  --container: 80rem;
+  --measure: 43.75rem;                           /* single reading column, 700px */
+
+  /* --- Shape & motion -------------------------------------------------- */
+  --radius-sm: 0.5rem;
+  --radius-md: 1.125rem;
+  --radius-card: 1.25rem;
+  --radius-lg: 2rem;
+  --radius-xl: 2.25rem;
+  --radius-pill: 999px;
+  --radius-arch: 999px 999px 1.25rem 1.25rem;
+
+  --ease: ease;
+  --duration: 0.5s;
+  --duration-slow: 1.4s;
+
+  /* Breakpoints (custom properties can't be used inside @media, so these are
+     documented here and repeated in the CSS):
+       phone      max-width: 720px   sticky call button, tighter layouts
+       nav        max-width: 1180px  desktop nav collapses to the menu button */
+}
