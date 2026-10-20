@@ -336,6 +336,14 @@
   line-height: 1.55;
   color: #4a3a22;
 }
+.pet-note__photo {
+  flex: none;
+  width: 7rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 65%;
+}
 .endorsements {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(23.75rem, 100%), 1fr));

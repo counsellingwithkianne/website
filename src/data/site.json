@@ -5,7 +5,7 @@
   "logoTagline": "Counselling and Psychometry",
   "url": "https://counsellingwithkianne.co.za",
   "locale": "en_ZA",
-  "noindex": true,
+  "noindex": false,
   "contact": {
     "phoneDisplay": "066 412 1259",
     "whatsappNumber": "27664121259",

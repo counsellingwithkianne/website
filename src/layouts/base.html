@@ -2,12 +2,16 @@
 <html lang="en-ZA">
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; connect-src 'self'; font-src 'self'; form-action 'none'; frame-src 'none'; img-src 'self' data:; object-src 'none'; script-src 'self' '{{ page.structuredDataHash }}'; style-src 'self'">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ page.title }}</title>
   <meta name="description" content="{{ page.description }}">
-  {{#if site.noindex}}<meta name="robots" content="noindex, nofollow">{{/if}}
+  <meta name="robots" content="{{#if site.noindex}}noindex, nofollow{{else}}index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1{{/if}}">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="theme-color" content="#faf4ea">
   <link rel="canonical" href="{{ page.url }}">
+  <link rel="alternate" hreflang="en-ZA" href="{{ page.url }}">
+  <link rel="alternate" hreflang="x-default" href="{{ page.url }}">
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="{{ site.locale }}">
@@ -16,7 +20,16 @@
   <meta property="og:description" content="{{ page.description }}">
   <meta property="og:url" content="{{ page.url }}">
   <meta property="og:image" content="{{ page.ogImage }}">
+  <meta property="og:image:secure_url" content="{{ page.ogImage }}">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="KC monogram with a protea, leafy sprigs and a hummingbird">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ page.title }}">
+  <meta name="twitter:description" content="{{ page.description }}">
+  <meta name="twitter:image" content="{{ page.ogImage }}">
+  <meta name="twitter:image:alt" content="KC monogram with a protea, leafy sprigs and a hummingbird">
 
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
@@ -24,6 +37,7 @@
   <link rel="preload" href="assets/fonts/cormorant-garamond-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/jost-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{{ assets.css }}">
+  <script type="application/ld+json">{{ page.structuredData }}</script>
 </head>
 <body class="page-{{ page.slug }}">
   <a class="skip-link" href="#main">Skip to content</a>

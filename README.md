@@ -22,9 +22,10 @@ You need [Node.js](https://nodejs.org) 20 or newer. There is nothing to install.
 ```bash
 npm run dev       # build, then preview at http://localhost:4173
 npm run build     # build only, output goes to dist/
+npm run preview   # preview an existing dist/ build
 ```
 
-Re-run `npm run dev` after each change. The build also checks every link, image and font reference, and fails if one is broken.
+`npm run dev` watches `src/`, rebuilds after each change and reloads open browser tabs. The build also checks every link, image and font reference, and fails if one is broken.
 
 ## How it is organised
 
@@ -33,6 +34,7 @@ Re-run `npm run dev` after each change. The build also checks every link, image 
 ├── .github/workflows/deploy.yml   Build and deploy to GitHub Pages
 ├── scripts/
 │   ├── build.mjs                  The build (pages + CSS + assets + link check)
+│   ├── dev.mjs                    Local watcher and live reload
 │   ├── preview.mjs                Tiny local server for dist/
 │   └── lib/                       Template engine and link checker
 └── src/
@@ -77,15 +79,6 @@ A missing value fails the build, so a typo can't quietly ship an empty gap.
 
 **Add a page.** Create `src/pages/new-page.html` with front matter (`title`, `description`, `nav`). To put it in the menu, add an entry to `nav` in `src/data/site.json`.
 
-**Swap in the real photos.** There are dashed placeholders for Kianne's portrait (Home and About) and for Jaxie (About). Replace each `<div class="placeholder">` block with an image, for example:
-
-```html
-<div class="arch">
-  <img src="assets/images/kianne-portrait.webp" width="1200" height="1500"
-       alt="Kianne smiling in soft natural light" loading="lazy" decoding="async">
-</div>
-```
-
 Export photos as WebP (about 1200px on the long side keeps them light), and always give `width`, `height` and meaningful `alt` text.
 
 ## Deploying to GitHub Pages
@@ -104,9 +97,9 @@ To serve it from `counsellingwithkianne.co.za` once the domain is registered, cr
 
 This is a prototype for feedback, so a few things are set up to be safe:
 
-- [ ] **Search engines are told to ignore it.** `"noindex": true` in `src/data/site.json` adds a `noindex` tag to every page. Set it to `false` at launch.
+- [x] **Search indexing is enabled.** The build creates `robots.txt` and `sitemap.xml` from the canonical URL. Set `"noindex": true` in `src/data/site.json` to block indexing on a future private preview.
 - [ ] **Confirm the logo wording.** The supplied logo reads "Counselling & Psychometry". The original brief asked for "Specialist Wellness Counsellor" only, until registration is complete. Confirm with Kianne, and swap `src/assets/images/logo.webp` if needed. The home page still shows "Specialist Wellness Counsellor" as its label.
-- [ ] **Replace the photo placeholders** with the portrait session photos.
+- [x] **Replace the photo placeholders** with the portrait session photos.
 - [ ] **Re-check the helpline numbers** in `src/data/site.json` at [sadag.org](https://www.sadag.org).
 - [ ] **Confirm `url`** in `src/data/site.json` matches the final domain (used for canonical and social-share tags).
 - [ ] The hero and call-band photos are mood images, not photos of Kianne. Swap for her own if she prefers.

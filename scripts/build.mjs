@@ -15,7 +15,7 @@
 import { createHash } from 'node:crypto';
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { basename, join, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { checkLinks } from './lib/check-links.mjs';
 import { createRenderer } from './lib/template.mjs';
 
@@ -53,6 +53,30 @@ function loadSite() {
     mailto: `mailto:${contact.email}`,
     year: new Date().getFullYear(),
   };
+}
+
+const xmlEscape = (value) => value.replace(/[<>&'\"]/g, (character) => ({
+  '<': '&lt;',
+  '>': '&gt;',
+  '&': '&amp;',
+  "'": '&apos;',
+  '"': '&quot;',
+})[character]);
+
+function buildDiscoveryFiles(site, pages) {
+  const sitemap = [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    ...pages.map(({ url }) => `  <url><loc>${xmlEscape(url)}</loc></url>`),
+    '</urlset>',
+    '',
+  ].join('\n');
+  writeFileSync(join(DIST, 'sitemap.xml'), sitemap);
+
+  const robots = site.noindex
+    ? 'User-agent: *\nDisallow: /\n'
+    : `User-agent: *\nAllow: /\n\nSitemap: ${site.url}/sitemap.xml\n`;
+  writeFileSync(join(DIST, 'robots.txt'), robots);
 }
 
 // --- CSS ------------------------------------------------------------------
@@ -103,7 +127,7 @@ function parsePage(source, file) {
 
 // --- Build ----------------------------------------------------------------
 
-function build() {
+export function build() {
   const started = performance.now();
   rmSync(DIST, { recursive: true, force: true });
   mkdirSync(DIST, { recursive: true });
@@ -122,15 +146,58 @@ function build() {
 
   const pageFiles = listFiles(join(SRC, 'pages'), '.html');
   const written = [];
+  const pages = [];
 
   for (const file of pageFiles) {
     const { meta, body } = parsePage(readText(join(SRC, 'pages', file)), file);
     const slug = basename(file, '.html');
     const path = file === 'index.html' ? '' : file;
 
+    const url = `${site.url}/${path}`;
+    const ogImage = `${site.url}/assets/images/og-image.jpg`;
+    const structuredData = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'WebSite',
+          '@id': `${site.url}/#website`,
+          url: `${site.url}/`,
+          name: site.name,
+          inLanguage: 'en-ZA',
+        },
+        {
+          '@type': 'Organization',
+          '@id': `${site.url}/#practice`,
+          name: site.name,
+          url: `${site.url}/`,
+          logo: `${site.url}/assets/images/logo.webp`,
+          email: site.contact.email,
+          telephone: `+${site.contact.whatsappNumber}`,
+          areaServed: { '@type': 'Country', name: 'South Africa' },
+          founder: { '@id': `${site.url}/#kianne` },
+          sameAs: [site.instagramUrl, site.contact.psychologyTodayUrl],
+        },
+        {
+          '@type': 'Person',
+          '@id': `${site.url}/#kianne`,
+          name: site.person,
+          jobTitle: site.role,
+          image: `${site.url}/assets/images/kianne.png`,
+          worksFor: { '@id': `${site.url}/#practice` },
+        },
+        {
+          '@type': 'Service',
+          name: 'Online counselling',
+          provider: { '@id': `${site.url}/#practice` },
+          areaServed: { '@type': 'Country', name: 'South Africa' },
+          availableChannel: { '@type': 'ServiceChannel', serviceUrl: `${site.url}/contact.html` },
+        },
+      ],
+    });
+    const structuredDataHash = `sha256-${createHash('sha256').update(structuredData).digest('base64')}`;
     const context = {
       site,
-      page: { ...meta, slug, url: `${site.url}/${path}`, ogImage: `${site.url}/assets/images/og-image.jpg` },
+      page: { ...meta, slug, url, ogImage, structuredData, structuredDataHash },
       nav: site.nav.map((item) => ({ ...item, active: item.key === meta.nav })),
       assets: { css: cssHref },
     };
@@ -139,19 +206,28 @@ function build() {
     const html = render(layout, context, 'layout:base');
     writeFileSync(join(DIST, file), html);
     written.push(join(DIST, file));
+    pages.push({ url });
   }
 
   cpSync(join(SRC, 'assets'), join(DIST, 'assets'), { recursive: true });
   if (existsSync(join(SRC, 'public'))) cpSync(join(SRC, 'public'), DIST, { recursive: true });
+  buildDiscoveryFiles(site, pages);
 
   const problems = checkLinks(DIST, written, [join(DIST, 'assets', 'css', 'styles.css')]);
   if (problems.length) {
     console.error(`\nBroken references:\n${problems.map((p) => `  - ${p}`).join('\n')}`);
-    process.exit(1);
+    throw new Error('Build failed because references are broken.');
   }
 
   const ms = Math.round(performance.now() - started);
   console.log(`Built ${pageFiles.length} pages to dist/ in ${ms}ms. All links resolve.`);
 }
 
-build();
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  try {
+    build();
+  } catch (error) {
+    console.error(error.message);
+    process.exitCode = 1;
+  }
+}
