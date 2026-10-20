@@ -182,7 +182,7 @@ export function build() {
           '@id': `${site.url}/#kianne`,
           name: site.person,
           jobTitle: site.role,
-          image: `${site.url}/assets/images/kianne.png`,
+          image: `${site.url}/assets/images/kianne.jpeg`,
           worksFor: { '@id': `${site.url}/#practice` },
         },
         {
