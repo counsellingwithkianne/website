@@ -1,3 +1,8 @@
 <div class="sticky-cta">
-  <a class="btn" href="{{ site.whatsappUrl }}" target="_blank" rel="noopener">Book a free 15-minute call</a>
+  <div class="sticky-cta__row">
+    <a class="btn" href="{{ site.whatsappUrl }}" target="_blank" rel="noopener">Book a free call</a>
+{{#if site.form.accessKey}}
+    <a class="btn btn--ghost" href="contact.html#enquiry">Send details</a>
+{{/if}}
+  </div>
 </div>

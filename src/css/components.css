@@ -140,7 +140,7 @@
   gap: 0.875rem;
   margin-top: var(--space-2);
 }
-.hero__buttons {
+.btn-row {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -706,8 +706,15 @@ textarea.form__input {
     border-top: 1px solid var(--line);
     background: rgb(250 244 234 / 0.96);
   }
-  .sticky-cta .btn {
+  .sticky-cta__row {
     display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+  .sticky-cta .btn {
+    flex: 1 1 auto;
+    padding-inline: var(--space-4);
+    letter-spacing: 0.1em;
   }
 }
 

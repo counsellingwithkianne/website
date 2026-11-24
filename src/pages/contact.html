@@ -11,11 +11,13 @@ nav: contact
             <h1 class="h-page">Get in touch</h1>
             <p class="text-lg">The easiest way to reach me is on WhatsApp. Send a message to book a free 15-minute video call, or just to ask a question. There's no pressure and no commitment.</p>
             <div class="hero__cta">
-              <a class="btn btn--lg" href="{{ site.whatsappUrl }}" target="_blank" rel="noopener">Message me on WhatsApp</a>
-              <span class="hero__reassure">I reply within a day.</span>
+              <div class="btn-row">
+                <a class="btn btn--lg" href="{{ site.whatsappUrl }}" target="_blank" rel="noopener">Message me on WhatsApp</a>
 {{#if site.form.accessKey}}
-              <p class="hero__reassure">Prefer not to use WhatsApp? <a class="link-underline" href="#enquiry">Leave your details and I'll reach out.</a></p>
+                <a class="btn btn--lg btn--ghost" href="#enquiry">Leave your details</a>
 {{/if}}
+              </div>
+              <span class="hero__reassure">I reply within a day.</span>
             </div>
           </div>
           <div class="split__media">

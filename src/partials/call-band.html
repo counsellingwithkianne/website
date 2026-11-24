@@ -12,6 +12,9 @@
           <h2 class="call-band__title" id="call-band-title">Not sure I'm the right fit? Let's have a free fifteen-minute video call.</h2>
           <div class="call-band__actions">
             <a class="btn" href="{{ site.whatsappUrl }}" target="_blank" rel="noopener">Book your free call</a>
+{{#if site.form.accessKey}}
+            <a class="btn btn--ghost" href="contact.html#enquiry">Leave your details</a>
+{{/if}}
             <img class="call-band__bird" src="assets/images/hummingbird.webp" width="300" height="234" alt="" loading="lazy" decoding="async">
           </div>
         </div>

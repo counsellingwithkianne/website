@@ -20,6 +20,9 @@
       <nav class="nav-menu__panel" aria-label="Mobile">
         {{#each nav}}<a class="nav-menu__link" href="{{ this.href }}"{{#if this.active}} aria-current="page"{{/if}}>{{ this.label }}</a>
         {{/each}}<a class="btn nav-menu__cta" href="{{ site.whatsappUrl }}" target="_blank" rel="noopener">Book a free 15-minute call</a>
+{{#if site.form.accessKey}}
+        <a class="btn btn--ghost nav-menu__cta" href="contact.html#enquiry">Leave your details</a>
+{{/if}}
       </nav>
     </details>
   </div>

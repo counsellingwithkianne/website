@@ -48,10 +48,12 @@ nav: fees
               <li class="steps__item"><p><span class="steps__lead">Come as you are.</span> Join from anywhere private and comfortable. I invoice at the end of each month, and you can pay by transfer, cash or whatever is easiest.</p></li>
             </ol>
             <p class="text-prose">If cost is a worry, please tell me. We can work something out together.</p>
-            <a class="btn" href="{{ site.whatsappUrl }}" target="_blank" rel="noopener">Book a free 15-minute call</a>
+            <div class="btn-row">
+              <a class="btn" href="{{ site.whatsappUrl }}" target="_blank" rel="noopener">Book a free 15-minute call</a>
 {{#if site.form.accessKey}}
-            <p class="text-prose">Prefer not to use WhatsApp? <a class="link-underline" href="contact.html#enquiry">Leave your details</a> and I'll reach out.</p>
+              <a class="btn btn--ghost" href="contact.html#enquiry">Leave your details</a>
 {{/if}}
+            </div>
           </div>
         </div>
       </div>
