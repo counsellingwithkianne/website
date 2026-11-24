@@ -50,16 +50,20 @@ nav: contact
             </div>
 
             <div class="form__field">
-              <label class="form__label" for="enquiry-contact">Your WhatsApp number or email</label>
-              <input class="form__input" type="text" id="enquiry-contact" name="contact_details" autocomplete="off" required>
+              <label class="form__label" for="enquiry-whatsapp">Your WhatsApp number</label>
+              <input class="form__input" type="tel" id="enquiry-whatsapp" name="whatsapp_number" autocomplete="tel" inputmode="tel" required>
+            </div>
+
+            <div class="form__field">
+              <label class="form__label" for="enquiry-email">Your email address</label>
+              <input class="form__input" type="email" id="enquiry-email" name="email" autocomplete="email" required>
             </div>
 
             <fieldset class="form__field">
-              <legend class="form__label">How would you like me to reach out?</legend>
+              <legend class="form__label">Which would you prefer I use to reach out?</legend>
               <div class="form__choices">
                 <label class="form__choice"><input type="radio" name="preferred_contact_method" value="WhatsApp" checked> WhatsApp</label>
                 <label class="form__choice"><input type="radio" name="preferred_contact_method" value="Email"> Email</label>
-                <label class="form__choice"><input type="radio" name="preferred_contact_method" value="Phone call"> Phone call</label>
               </div>
             </fieldset>
 
