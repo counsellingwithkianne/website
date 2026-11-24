@@ -140,6 +140,12 @@
   gap: 0.875rem;
   margin-top: var(--space-2);
 }
+.hero__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-4);
+}
 .hero__reassure {
   font-size: 1.03125rem;
   color: var(--color-ink-subtle);
