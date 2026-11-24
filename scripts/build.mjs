@@ -206,7 +206,8 @@ export function build() {
     const html = render(layout, context, 'layout:base');
     writeFileSync(join(DIST, file), html);
     written.push(join(DIST, file));
-    pages.push({ url });
+    // Pages with "sitemap: no" in their front matter (such as the form's thank-you page) stay out of the sitemap.
+    if (meta.sitemap !== 'no') pages.push({ url });
   }
 
   cpSync(join(SRC, 'assets'), join(DIST, 'assets'), { recursive: true });

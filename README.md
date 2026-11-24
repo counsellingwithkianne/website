@@ -1,6 +1,6 @@
 # Counselling with Kianne
 
-A prototype website for **Counselling with Kianne**, the online counselling practice of Kianne Coltman, Specialist Wellness Counsellor, in South Africa. It is a small static site: plain HTML and CSS, no framework, no JavaScript, and nothing collected from visitors.
+A prototype website for **Counselling with Kianne**, the online counselling practice of Kianne Coltman, Specialist Wellness Counsellor, in South Africa. It is a small static site: plain HTML and CSS, no framework and no JavaScript. The site itself collects nothing from visitors; the optional enquiry form passes details straight to Kianne's email through Web3Forms (see below).
 
 The design follows the brand brief: warm cream and gold, handwritten and botanical touches, calm by default. One main action runs through every page: **Book a free 15-minute call**, which opens a pre-filled WhatsApp message.
 
@@ -13,7 +13,8 @@ The design follows the brand brief: warm cream and gold, handwritten and botanic
 | My approach | `src/pages/approach.html` |
 | How I can help | `src/pages/help.html` |
 | Fees and booking | `src/pages/fees.html` |
-| Contact (with the privacy note) | `src/pages/contact.html` |
+| Contact (with the enquiry form and privacy note) | `src/pages/contact.html` |
+| Form thank-you (hidden from search and the sitemap) | `src/pages/thanks.html` |
 
 ## Quick start
 
@@ -81,6 +82,20 @@ A missing value fails the build, so a typo can't quietly ship an empty gap.
 
 Export photos as WebP (about 1200px on the long side keeps them light), and always give `width`, `height` and meaningful `alt` text.
 
+## The enquiry form
+
+The Contact page has a short form ("Or leave your details and I'll reach out") that emails each enquiry to Kianne through [Web3Forms](https://web3forms.com). It stays hidden, along with the links to it, until an access key is set.
+
+1. Get a free access key at web3forms.com by entering `kiannecounselling@gmail.com`. The key is designed to sit in public page code, so it is safe to commit.
+2. Put it in `src/data/site.json` under `form.accessKey`.
+3. Build and deploy, then send yourself a test enquiry and check it arrives (also check your spam folder the first time).
+
+Notes:
+
+- The Content Security Policy in `src/layouts/base.html` allows forms to post to `api.web3forms.com` and nowhere else. If the form service ever changes, update `form-action` there and the `action` in `src/pages/contact.html`.
+- After sending, visitors land on `src/pages/thanks.html`. It is marked `noindex` and `sitemap: no` in its front matter, which the build understands.
+- The form fields are in `src/pages/contact.html`; the styles are under "Enquiry form" in `src/css/components.css`.
+
 ## Deploying to GitHub Pages
 
 1. Push this repository to GitHub, with the default branch named `main`.
@@ -109,7 +124,7 @@ This is a prototype for feedback, so a few things are set up to be safe:
 - **Mobile first.** Layouts are fluid grids that stack on phones; body text never drops below 17px. A sticky call button appears on phones.
 - **Accessible.** Text meets 4.5:1 contrast (the darker rose and bronze are used for text, the lighter protea rose only for decoration), there is a skip link, visible focus states, real buttons and links, and descriptive alt text. The menu and FAQ use native `<details>`, so they work with the keyboard and without JavaScript.
 - **Calm.** No autoplay, pop-ups or loud animation. The only motion is a slow fade on page headings, switched off for visitors who prefer reduced motion.
-- **Private.** Fonts are self-hosted, so visitors' browsers make no requests to Google. There is no contact form, analytics or cookies. If any are added later, update the privacy note on the Contact page.
+- **Private.** Fonts are self-hosted, so visitors' browsers make no requests to Google. There are no analytics or cookies, and the only form is the enquiry form, which sends details to Kianne's email via Web3Forms. If anything else is added later, update the privacy note on the Contact page.
 - **Fast.** One small stylesheet (cache-busted by content hash), WebP images with explicit dimensions, and lazy loading below the fold.
 
 ## Credits
