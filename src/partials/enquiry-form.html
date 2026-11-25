@@ -1,0 +1,68 @@
+{{#if site.form.accessKey}}
+    <section class="section section--compact" id="enquiry" aria-labelledby="enquiry-title">
+      <div class="container">
+        <div class="enquiry">
+          <div class="stack stack--start">
+            <div class="divider divider--start" aria-hidden="true"><span class="divider__dot"></span></div>
+            <h2 class="h-section" id="enquiry-title">{{#if page.formHeading}}{{ page.formHeading }}{{else}}Or leave your details and I'll reach out{{/if}}</h2>
+            <p class="text-prose">If messaging on WhatsApp feels like a big first step, this is a gentler way to begin. Share as much or as little as you like, and I'll get back to you within a day to arrange your free 15-minute video call. I work with women aged 18 and over.</p>
+          </div>
+
+          <form class="form" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="{{ site.form.accessKey }}">
+            <input type="hidden" name="subject" value="New enquiry from {{ site.name }}">
+            <input type="hidden" name="from_name" value="{{ site.name }} website">
+            <input type="hidden" name="enquiry_came_from" value="{{#if page.source}}{{ page.source }}{{else}}Website contact page{{/if}}">
+            <input type="hidden" name="redirect" value="{{ site.url }}/thanks.html">
+            <input class="form__trap" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off">
+
+            <div class="form__field">
+              <label class="form__label" for="enquiry-name">Your full name</label>
+              <input class="form__input" type="text" id="enquiry-name" name="name" autocomplete="name" required>
+              <p class="form__hint">First name and surname, please.</p>
+            </div>
+
+            <div class="form__field">
+              <label class="form__label" for="enquiry-whatsapp">Your WhatsApp number</label>
+              <input class="form__input" type="tel" id="enquiry-whatsapp" name="whatsapp_number" autocomplete="tel" inputmode="tel" required>
+            </div>
+
+            <div class="form__field">
+              <label class="form__label" for="enquiry-email">Your email address</label>
+              <input class="form__input" type="email" id="enquiry-email" name="email" autocomplete="email" required>
+            </div>
+
+            <fieldset class="form__field">
+              <legend class="form__label">Which would you prefer I use to reach out?</legend>
+              <div class="form__choices">
+                <label class="form__choice"><input type="radio" name="preferred_contact_method" value="WhatsApp" checked> WhatsApp</label>
+                <label class="form__choice"><input type="radio" name="preferred_contact_method" value="Email"> Email</label>
+              </div>
+            </fieldset>
+
+            <div class="form__field">
+              <label class="form__label" for="enquiry-reason">Anything you'd like me to know? <span class="form__optional">(optional)</span></label>
+              <textarea class="form__input" id="enquiry-reason" name="reason_for_reaching_out" rows="4" aria-describedby="enquiry-reason-hint"></textarea>
+              <p class="form__hint" id="enquiry-reason-hint">You don't need to share details yet. A few words, or nothing at all, is fine.</p>
+            </div>
+
+            <div class="form__field">
+              <label class="form__label" for="enquiry-times">What days and times usually work for you? <span class="form__optional">(optional)</span></label>
+              <textarea class="form__input" id="enquiry-times" name="days_and_times" rows="3" aria-describedby="enquiry-times-hint"></textarea>
+              <p class="form__hint" id="enquiry-times-hint">A rough idea is fine. I'm available Monday to Thursday, 8:00 to 19:00, and Friday, 8:00 to 13:00.</p>
+            </div>
+
+            <label class="form__choice">
+              <input type="checkbox" name="confirms_18_or_over" value="Yes" required>
+              I confirm that I am 18 years of age or older.
+            </label>
+
+            <p class="form__note">Your details are only used so I can reply to you. See <a class="link-underline" href="contact.html#privacy">how your privacy is looked after</a>.</p>
+
+            <button class="btn form__submit" type="submit">Send my details</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+{{/if}}
